@@ -75,6 +75,14 @@ jugadasM = []
 jugadasJ = []
 contador = 0 #jugadas pares para la máquina, las impares para el humano
 posiciones = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+combinaciones = [[1, 2, 3],
+                 [4, 5, 6], 
+                 [7, 8, 9],
+                 [1, 4, 7],
+                 [2, 5, 8],
+                 [3, 6, 9],
+                 [1, 5, 9],
+                 [3, 5, 7]]
 
 mostrarTablero(posiciones)
 
