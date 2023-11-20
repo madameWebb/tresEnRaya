@@ -17,10 +17,10 @@ def jugarMaquina(contador, posiciones, jugadasM):
     return contador
 
 def comprobarJugada(jugada, posiciones):
-    if not (jugada == posiciones[jugada - 1]):
-        return False
+    if jugada == posiciones[jugada - 1]:
+        return True
     else:
-        return True    
+        return False  
 
 def jugarHumano(contador, posiciones, jugadasJ):
     while True:
