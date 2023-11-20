@@ -36,13 +36,16 @@ def comprobarJugada(jugada, posiciones):
 def jugarHumano(contador):
     control = False
     while control == False:
-        jugada = int(input("Elige la posición que quieres ocupar: "))
-        if 1<=jugada<=9:
-            control = guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones)
-            if not control:
-                mostrarCasillaOcupada()
-        else:
-            print("La opción no se encuentra disponible")   
+        try:
+            jugada = int(input("Elige la posición que quieres ocupar: "))
+            if 1<=jugada<=9:
+                control = guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones)
+                if not control:
+                    print("la casilla está ocupada")
+            else:
+                print("La opción no se encuentra disponible") 
+        except ValueError:
+            print("Debes introducir un número entre el 1 y el 9, ambos incluidos") 
     contador = contador + 1
     return contador
         
@@ -56,8 +59,8 @@ def comprobarFinJuego(jugadas, combinaciones):
                 return True
 
 
-def mostrarCasillaOcupada():
-    print("la casilla está ocupada")
+# def mostrarCasillaOcupada():
+#     print("la casilla está ocupada")
 
 def mostrarTablero(posiciones):
     print("+------+------+------+")
