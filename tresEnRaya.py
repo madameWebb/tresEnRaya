@@ -54,7 +54,6 @@ def comprobarFinJuego(jugadas, combinaciones):
             if combinaciones[j][k] in jugadas:
                 aciertos = aciertos + 1
             if aciertos == 3:
-                print("Fin partida")
                 return True
 
 
@@ -99,8 +98,9 @@ print("juguemos al tres en raya, primero muevo yo:")
 while contador < 9:
     contador = jugarMaquina(contador, posiciones, jugadasM, jugadasJ)
     mostrarTablero(posiciones)
-    if comprobarFinJuego(jugadasJ, combinaciones):
+    if comprobarFinJuego(jugadasM, combinaciones):
         print("Gané, fin del juego")
+        break
     if contador != 9:
         contador = jugarHumano(contador)
         mostrarTablero(posiciones)
