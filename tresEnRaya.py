@@ -1,5 +1,4 @@
 ##Tres en raya
-## Probando git, probando, probando...
 import random
 
 def jugarMaquina(contador, posiciones, jugadasM, jugadasJ):
@@ -7,13 +6,13 @@ def jugarMaquina(contador, posiciones, jugadasM, jugadasJ):
     if contador == 0:
         guardarJugada(5, contador, jugadasM, jugadasJ, posiciones)
         posiciones[4] = "X"
-        contador = contador + 1
+        contador +=1
     else:
-        control = False
-        while control == False:
+        while True:
             jugada = random.randint(1, 9)
-            control = guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones)
-        contador = contador + 1
+            if guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
+                break
+        contador +=1
     return contador
         
 def guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
@@ -28,25 +27,25 @@ def guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
     return False
 
 def comprobarJugada(jugada, posiciones):
-    if (jugada == posiciones[jugada - 1]) == False:
+    if not (jugada == posiciones[jugada - 1]):
         return False
     else:
         return True    
 
 def jugarHumano(contador):
-    control = False
-    while control == False:
+    while True:
         try:
             jugada = int(input("Elige la posición que quieres ocupar: "))
             if 1<=jugada<=9:
-                control = guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones)
-                if not control:
+                if guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
+                    break
+                else:
                     print("la casilla está ocupada")
             else:
                 print("La opción no se encuentra disponible") 
         except ValueError:
             print("Debes introducir un número entre el 1 y el 9, ambos incluidos") 
-    contador = contador + 1
+    contador += 1
     return contador
         
 def comprobarFinJuego(jugadas, combinaciones):
@@ -54,13 +53,10 @@ def comprobarFinJuego(jugadas, combinaciones):
         aciertos = 0
         for k in range(len(combinaciones[j])):
             if combinaciones[j][k] in jugadas:
-                aciertos = aciertos + 1
+                aciertos += 1
             if aciertos == 3:
                 return True
 
-
-# def mostrarCasillaOcupada():
-#     print("la casilla está ocupada")
 
 def mostrarTablero(posiciones):
     print("+------+------+------+")
