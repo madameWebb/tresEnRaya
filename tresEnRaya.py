@@ -8,14 +8,13 @@ def jugarMaquina(contador, posiciones, jugadasM, jugadasJ):
         guardarJugada(5, contador, jugadasM, jugadasJ, posiciones)
         posiciones[4] = "X"
         contador = contador + 1
-        return contador
     else:
         control = False
         while control == False:
             jugada = random.randint(1, 9)
             control = guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones)
         contador = contador + 1
-        return contador
+    return contador
         
 def guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
     if comprobarJugada(jugada, posiciones):
