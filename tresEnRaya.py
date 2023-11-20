@@ -1,30 +1,20 @@
 ##Tres en raya
 import random
 
-def jugarMaquina(contador, posiciones, jugadasM, jugadasJ):
-    
+def jugarMaquina(contador, posiciones, jugadasM):
     if contador == 0:
-        guardarJugada(5, contador, jugadasM, jugadasJ, posiciones)
+        jugadasM.append(5)
         posiciones[4] = "X"
         contador +=1
     else:
         while True:
             jugada = random.randint(1, 9)
-            if guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
+            if comprobarJugada(jugada, posiciones):
+                jugadasM.append(jugada)
+                posiciones[jugada - 1] = "X"
                 break
         contador +=1
     return contador
-        
-def guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
-    if comprobarJugada(jugada, posiciones):
-        if contador % 2 == 0:
-            jugadasM.append(jugada)
-            posiciones[jugada - 1] = "X"
-        else:
-            jugadasJ.append(jugada)
-            posiciones[jugada - 1] = "O"
-        return True
-    return False
 
 def comprobarJugada(jugada, posiciones):
     if not (jugada == posiciones[jugada - 1]):
@@ -32,12 +22,14 @@ def comprobarJugada(jugada, posiciones):
     else:
         return True    
 
-def jugarHumano(contador):
+def jugarHumano(contador, posiciones, jugadasJ):
     while True:
         try:
             jugada = int(input("Elige la posición que quieres ocupar: "))
             if 1<=jugada<=9:
-                if guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
+                if comprobarJugada(jugada, posiciones):
+                    jugadasJ.append(jugada)
+                    posiciones[jugada - 1] = "O"
                     break
                 else:
                     print("la casilla está ocupada")
@@ -94,13 +86,13 @@ print("juguemos al tres en raya, primero muevo yo:")
 
 
 while contador < 9:
-    contador = jugarMaquina(contador, posiciones, jugadasM, jugadasJ)
+    contador = jugarMaquina(contador, posiciones, jugadasM)
     mostrarTablero(posiciones)
     if comprobarFinJuego(jugadasM, combinaciones):
         print("Gané, fin del juego")
         break
     if contador != 9:
-        contador = jugarHumano(contador)
+        contador = jugarHumano(contador, posiciones, jugadasJ)
         mostrarTablero(posiciones)
         if comprobarFinJuego(jugadasJ, combinaciones):
             print("Ganaste, Persona, fin del juego")
@@ -108,6 +100,3 @@ while contador < 9:
         print("Ahora me toca a mi:")
     else:
         print("fin del juego, resultado: Tablas")
-
-
-
