@@ -22,11 +22,10 @@ def guardarJugada(jugada, contador, jugadasM, jugadasJ, posiciones):
         if contador % 2 == 0:
             jugadasM.append(jugada)
             posiciones[jugada - 1] = "X"
-            return True
         else:
             jugadasJ.append(jugada)
             posiciones[jugada - 1] = "O"
-            return True
+        return True
     return False
 
 def comprobarJugada(jugada, posiciones):
@@ -48,6 +47,16 @@ def jugarHumano(contador):
     contador = contador + 1
     return contador
         
+def comprobarFinJuego(jugadas, combinaciones):
+    for j in range(len(combinaciones)):
+        aciertos = 0
+        for k in range(len(combinaciones[j])):
+            if combinaciones[j][k] in jugadas:
+                aciertos = aciertos + 1
+            if aciertos == 3:
+                print("Fin partida")
+                return True
+
 
 def mostrarCasillaOcupada():
     print("la casilla está ocupada")
@@ -61,11 +70,9 @@ def mostrarTablero(posiciones):
     print("|      |      |      |")
     print("|  ", posiciones[3], " |  ", posiciones[4], " |  ", posiciones[5], " |")
     print("|      |      |      |")
-    print("|      |      |      |")
     print("+------+------+------+")
     print("|      |      |      |")
     print("|  ", posiciones[6], " |  ", posiciones[7], " |  ", posiciones[8], " |")
-    print("|      |      |      |")
     print("|      |      |      |")
     print("+------+------+------+")
 
@@ -92,12 +99,17 @@ print("juguemos al tres en raya, primero muevo yo:")
 while contador < 9:
     contador = jugarMaquina(contador, posiciones, jugadasM, jugadasJ)
     mostrarTablero(posiciones)
+    if comprobarFinJuego(jugadasJ, combinaciones):
+        print("Gané, fin del juego")
     if contador != 9:
         contador = jugarHumano(contador)
         mostrarTablero(posiciones)
+        if comprobarFinJuego(jugadasJ, combinaciones):
+            print("Ganaste, Persona, fin del juego")
+            break
         print("Ahora me toca a mi:")
     else:
-        print("fin del juego")
+        print("fin del juego, resultado: Tablas")
 
 
 
